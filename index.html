@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cute Cats</title>
+    <!-- Подключаем стили, если нужно -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Cute Cats</h1>
+        <div class="cat-info">
+            <img id="catImage" src="#" alt="Cute cat">
+            <h2 id="catTitle">Loading...</h2>
+            <p id="catDescription">Fetching data...</p>
+        </div>
+    </div>
+
+    <!-- Подключаем скрипт data.js -->
+    <script src="data.js"></script>
+    <script>
+        // В этом блоке мы будем использовать функцию fetchData из data.js
+        // и обновлять содержимое страницы с помощью полученных данных
+        import { fetchData } from './data.js'; // Подключаем функцию fetchData из data.js
+
+        // Функция для обновления данных на странице
+        async function updatePage() {
+            const catData = await fetchData(); // Получаем данные о котике из API
+
+            // Обновляем содержимое страницы
+            const catImage = document.getElementById('catImage');
+            const catTitle = document.getElementById('catTitle');
+            const catDescription = document.getElementById('catDescription');
+
+            catImage.src = catData.url;
+            catTitle.textContent = 'Cute Cat';
+            catDescription.textContent = 'Here is a cute cat fetched from The Cat API!';
+        }
+
+        // Вызываем функцию updatePage при загрузке страницы
+        window.onload = updatePage;
+    </script>
+</body>
+</html>
